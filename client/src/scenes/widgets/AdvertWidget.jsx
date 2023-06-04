@@ -24,7 +24,7 @@ const AdvertWidget = () => {
         style={{ borderRadius: "0.75rem", margin: "0.75rem 0" }}
       />
       <FlexBetween>
-        <Typography color={main}>Adidas India</Typography>
+        <Typography color={main}>Adidas India</Typography> 
         <Typography color={medium}>https://www.adidas.co.in</Typography>
       </FlexBetween>
       <Typography color={medium} m="0.5rem 0">
