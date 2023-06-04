@@ -56,7 +56,7 @@ const Navbar = () => {
         WebkitBackgroundClip: 'text',
         color: 'transparent',
         "&:hover": {
-          color: primaryLight,
+          // color: primaryLight,
           cursor: "pointer",
         },
       }}

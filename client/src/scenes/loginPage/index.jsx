@@ -4,6 +4,7 @@ import Form from "./Form";
 const LoginPage = () => {
   const theme = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
+  
   return (
     <Box>
       <Box
@@ -11,14 +12,26 @@ const LoginPage = () => {
         backgroundColor={theme.palette.background.alt}
         p="1rem 6%"
         textAlign="center"
+        display="flex"
+        justifyContent="center"
       >
-        <Typography fontWeight="bold" fontSize="32px" color="primary">
-          GetInTouch
-        </Typography>
+       <Typography
+  fontWeight="bold"
+  fontSize="32px"
+     sx={{
+        backgroundImage: 'linear-gradient(to right, #833ab4, #fd1d1d, #fcb045)',
+        backgroundClip: 'text',
+        WebkitBackgroundClip: 'text',
+        color: 'transparent',
+    
+      }}
+>
+  GetInTouch
+</Typography>
       </Box>
       {/* FormBox */}
       <Box
-        widtn={isNonMobileScreens ? "50%" : "93%"}
+        width={isNonMobileScreens ? "50%" : "93%"}
         p="2rem"
         m="2rem auto"
         borderRadius="1.5rem"
