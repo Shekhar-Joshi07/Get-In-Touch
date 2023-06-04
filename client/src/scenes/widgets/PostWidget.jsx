@@ -3,8 +3,9 @@ import {
     FavoriteBorderOutlined,
     FavoriteOutlined,
     ShareOutlined,
+    SendOutlined,
   } from "@mui/icons-material";
-  import { Box, Divider, IconButton, Typography, useTheme } from "@mui/material";
+  import { Box, Divider, IconButton, Typography, useTheme, InputBase, Avatar } from "@mui/material";
   import FlexBetween from "components/FlexBetween";
   import Friend from "components/Friend";
   import WidgetWrapper from "components/WidgetWrapper";
@@ -24,6 +25,7 @@ import {
     comments,
   }) => {
     const [isComments, setIsComments] = useState(false);
+    const [comment, setComment] = useState("");
     const dispatch = useDispatch();
     const token = useSelector((state) => state.token);
     const loggedInUserId = useSelector((state) => state.user._id);
@@ -32,7 +34,7 @@ import {
   
     const { palette } = useTheme();
     const main = palette.neutral.main;
-    const primary = palette.primary.main;
+    // const primary = palette.primary.main;
   
     const patchLike = async () => {
       const response = await fetch(`http://localhost:3001/posts/${postId}/like`, {
@@ -45,6 +47,25 @@ import {
       });
       const updatedPost = await response.json();
       dispatch(setPost({ post: updatedPost }));
+    };
+  
+    const addComment = async () => {
+      // Making the API request to add the comment
+      const response = await fetch(`http://localhost:3001/posts/${postId}/comment`, {
+        method: "PATCH",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userId: loggedInUserId, comment }),
+      });
+  
+      // Updating the post with the newly added comment
+      const updatedPost = await response.json();
+      dispatch(setPost({ post: updatedPost }));
+  
+      // Reset the comment input field
+      setComment("");
     };
   
     return (
@@ -98,11 +119,22 @@ import {
               <Box key={`${name}-${i}`}>
                 <Divider />
                 <Typography sx={{ color: main, m: "0.5rem 0", pl: "1rem" }}>
-                  {comment}
+                  {comment.comment}
                 </Typography>
               </Box>
             ))}
             <Divider />
+            <Box sx={{ display: "flex", alignItems: "center", mt: "0.5rem" }}>
+              <InputBase
+                value={comment}
+                onChange={(e) => setComment(e.target.value)}
+                placeholder="Add a comment..."
+                sx={{ flex: 1, mr: "0.5rem" }}
+              />
+              <IconButton onClick={addComment}>
+                <SendOutlined />
+              </IconButton>
+            </Box>
           </Box>
         )}
       </WidgetWrapper>
@@ -110,3 +142,4 @@ import {
   };
   
   export default PostWidget;
+  
