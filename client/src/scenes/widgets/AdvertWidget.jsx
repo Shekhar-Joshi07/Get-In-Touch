@@ -29,7 +29,7 @@ const AdvertWidget = () => {
       </FlexBetween>
       <Typography color={medium} m="0.5rem 0">
       Men’s ODI CRICKET jersey is for every Indian Cricket Fan. 
-      The ODI jersey design represents the raw power, fierce beauty and undeniable strength of the tiger.
+      
       </Typography>
     </WidgetWrapper>
   );

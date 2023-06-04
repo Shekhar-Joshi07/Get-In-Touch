@@ -33,11 +33,21 @@ export const authSlice = createSlice({
       state.posts = action.payload.posts;
     },
     setPost: (state, action) => {
-      const updatedPosts = state.posts.map((post) => {
-        if (post._id === action.payload.post._id) return action.payload.post;
-        return post;
-      });
-      state.posts = updatedPosts;
+      const { post, deletedPostId } = action.payload;
+
+      if (deletedPostId) {
+        // Remove the deleted post from the state
+        state.posts = state.posts.filter((post) => post._id !== deletedPostId);
+      } else {
+        // Update the existing post
+        const updatedPosts = state.posts.map((p) => {
+          if (p._id === post._id) {
+            return post;
+          }
+          return p;
+        });
+        state.posts = updatedPosts;
+      }
     },
   },
 });

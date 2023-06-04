@@ -1,4 +1,5 @@
 import {
+   
     EditOutlined,
     DeleteOutlined,
     AttachFileOutlined,
@@ -8,6 +9,8 @@ import {
     MoreHorizOutlined,
   } from "@mui/icons-material";
   import {
+    Alert,
+    AlertTitle,
     Box,
     Divider,
     Typography,
@@ -33,10 +36,13 @@ import {
     const { palette } = useTheme();
     const { _id } = useSelector((state) => state.user);
     const token = useSelector((state) => state.token);
+    const mode = useSelector((state)=>state.mode)
     const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const mediumMain = palette.neutral.mediumMain;
     const medium = palette.neutral.medium;
-  
+    const [showToast, setShowToast] = useState(false);
+    const [toastMessage, setToastMessage] = useState("");
+
     const handlePost = async () => {
       const formData = new FormData();
       formData.append("userId", _id);
@@ -55,6 +61,10 @@ import {
       dispatch(setPosts({ posts }));
       setImage(null);
       setPost("");
+  
+      // Show success toast message
+      setToastMessage("Post created successfully.");
+      setShowToast(true);
     };
   
     return (
@@ -166,8 +176,24 @@ import {
             POST
           </Button>
         </FlexBetween>
+  
+        {showToast && (
+          <Alert
+            severity="success"
+            variant={mode==="dark"?"outlined" : "standard"}
+            onClose={() => setShowToast(false)}
+            sx={{ marginTop: "1rem", 
+            width: "100%",
+            borderRadius: "1rem",
+            }}
+          >
+            <AlertTitle>Completed</AlertTitle>
+            {toastMessage}
+          </Alert>
+        )}
       </WidgetWrapper>
     );
   };
   
   export default MyPostWidget;
+  

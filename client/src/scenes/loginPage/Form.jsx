@@ -6,6 +6,7 @@ import {
   useMediaQuery,
   Typography,
   useTheme,
+  Alert,
 } from "@mui/material";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
@@ -48,6 +49,7 @@ const initialValuesLogin = {
 
 const Form = () => {
   const [pageType, setPageType] = useState("login");
+  const [loginError, setLoginError] = useState(false);
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -85,8 +87,9 @@ const Form = () => {
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
+    console.log(loggedIn)
     onSubmitProps.resetForm();
-    if (loggedIn) {
+    if (loggedIn.success) {
       dispatch(
         setLogin({
           user: loggedIn.user,
@@ -94,6 +97,9 @@ const Form = () => {
         })
       );
       navigate("/home");
+      setLoginError(false)
+    } else {
+      setLoginError(true);
     }
   };
 
@@ -104,7 +110,6 @@ const Form = () => {
 
   return (
     <Formik
-
       onSubmit={handleFormSubmit}
       initialValues={isLogin ? initialValuesLogin : initialValuesRegister}
       validationSchema={isLogin ? loginSchema : registerSchema}
@@ -248,6 +253,20 @@ const Form = () => {
             >
               {isLogin ? "LOGIN" : "REGISTER"}
             </Button>
+            {/* {ALERT} */}
+            {loginError && (
+              <Alert
+
+                severity="error"
+                variant="filled"
+                onClose={() => setLoginError(false)}
+                sx={{
+                  m: "0 0 2rem ",
+                }}
+              >
+                Something went wrong. Try again with correct credentials.
+              </Alert>
+            )}
             <Typography
               onClick={() => {
                 setPageType(isLogin ? "register" : "login");

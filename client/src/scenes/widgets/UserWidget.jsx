@@ -49,7 +49,7 @@ import {
     } = user;
   
     return (
-      <WidgetWrapper>
+      <WidgetWrapper >
         {/* FIRST ROW */}
         <FlexBetween
           gap="0.5rem"
