@@ -35,6 +35,8 @@ const PostWidget = ({
   userPicturePath,
   likes,
   comments,
+  isSticky
+   // Add a timestamp field to the post object
 }) => {
   const [isComments, setIsComments] = useState(false);
   const [comment, setComment] = useState("");
@@ -128,7 +130,7 @@ const PostWidget = ({
   };
 
   return (
-    <WidgetWrapper m="2rem 0">
+    <WidgetWrapper m="2rem 0" style={{ position: isSticky ? "sticky" : "static" }}>
       <Friend
         friendId={postUserId}
         name={name}
@@ -176,43 +178,39 @@ const PostWidget = ({
               <ChatBubbleOutlineOutlined />
             </IconButton>
             <Typography>{comments.length}</Typography>
-            
           </FlexBetween>
-
         </FlexBetween>
 
-       <FlexBetween gap="0rem">
-        {loggedInUserId === postUserId && (
-        <FlexBetween  mr="0">
-          {editMode ? (
-            <>
-              <IconButton onClick={updatePost}>
-                <CheckOutlined />
-              </IconButton>
-              <IconButton onClick={cancelEdit}>
-                <CloseOutlined />
-              </IconButton>
-            </>
-          ) : (
-            <>
-              <IconButton onClick={() => setEditMode(true)}>
-                <EditOutlined />
-              </IconButton>
-              <IconButton onClick={deletePost}>
-                <DeleteOutlined />
-              </IconButton>
-            </>
+        <FlexBetween gap="0rem">
+          {loggedInUserId === postUserId && (
+            <FlexBetween mr="0">
+              {editMode ? (
+                <>
+                  <IconButton onClick={updatePost}>
+                    <CheckOutlined />
+                  </IconButton>
+                  <IconButton onClick={cancelEdit}>
+                    <CloseOutlined />
+                  </IconButton>
+                </>
+              ) : (
+                <>
+                  <IconButton onClick={() => setEditMode(true)}>
+                    <EditOutlined />
+                  </IconButton>
+                  <IconButton onClick={deletePost}>
+                    <DeleteOutlined />
+                  </IconButton>
+                </>
+              )}
+            </FlexBetween>
           )}
+          <IconButton>
+            <ShareOutlined />
+          </IconButton>
         </FlexBetween>
-      )}
-       <IconButton>
-          <ShareOutlined />
-        </IconButton>
-        </FlexBetween>
-
       </FlexBetween>
 
-    
 
       {isComments && (
         <Box mt="0.5rem">
@@ -235,9 +233,7 @@ const PostWidget = ({
                 >
                   {comment.userId.firstName} {comment.userId.lastName}
                 </Typography>
-                <Typography
-                  sx={{ color: main, m: "0.5rem 0", pl: "0.5rem" }}
-                >
+                <Typography sx={{ color: main, m: "0.5rem 0", pl: "0.5rem" }}>
                   {comment.comment}
                 </Typography>
               </Box>
