@@ -14,7 +14,7 @@ export const createPost = async (req, res) => {
       description,
       userPicturePath: user.picturePath,
       picturePath,
-      likes: {},
+      likes: [],
       comments: [],
     });
     await newPost.save();
@@ -102,16 +102,18 @@ export const likePost = async (req, res) => {
       post.likes.set(userId, true);
     }
 
-    await post.save();
+    const updatedPost = await post.save();
 
     // Populate the user information in the likes
-    await post.populate("likes.userId");
+    await updatedPost
+      .populate({ path: "likes.userId", model: "User" })
+      
 
-    res.status(200).json(post);
+    res.status(200).json(updatedPost);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-};
+}
 
 
 export const addComment = async (req, res) => {
