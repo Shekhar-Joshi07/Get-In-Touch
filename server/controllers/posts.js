@@ -91,6 +91,7 @@ export const likePost = async (req, res) => {
   try {
     const { id } = req.params;
     const { userId } = req.body;
+
     const post = await Post.findById(id);
     const isLiked = post.likes.get(userId);
 
@@ -100,17 +101,18 @@ export const likePost = async (req, res) => {
       post.likes.set(userId, true);
     }
 
-    const updatedPost = await Post.findByIdAndUpdate(
-      id,
-      { likes: post.likes },
-      { new: true }
-    );
+    const updatedPost = await post.save();
+
+    // Populate the user information in the likes
+    await updatedPost
+      .populate({ path: "likes.userId", model: "User" })
+      
 
     res.status(200).json(updatedPost);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-};
+}
 
 
 export const addComment = async (req, res) => {

@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const postSchema = mongoose.Schema(
   {
     userId: {
-      type:String,
+      type: String,
       required: true,
     },
     firstName: {
@@ -18,10 +18,19 @@ const postSchema = mongoose.Schema(
     description: String,
     picturePath: String,
     userPicturePath: String,
-    likes: {
-      type: Map,
-      of: Boolean,
-    },
+    likes: [
+      {
+        userId: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "User",
+          required: true,
+        },
+        like: {
+          type: Map,
+          of: Boolean,
+        },
+      },
+    ],
     comments: [
       {
         userId: {
