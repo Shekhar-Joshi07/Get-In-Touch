@@ -66,8 +66,6 @@ export const deletePost = async (req, res) => {
 };
 
 
-import Post from "../models/postModel";
-
 export const getFeedPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate("comments.userId").populate("likes.userId");
