@@ -4,9 +4,9 @@ import Form from "./Form";
 const LoginPage = () => {
   const theme = useTheme();
   const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
-  
+  const isTablet = useMediaQuery("(min-width: 768px)");
   return (
-    <Box>
+    <Box >
       <Box
         width="100%"
         backgroundColor={theme.palette.background.alt}
@@ -14,20 +14,24 @@ const LoginPage = () => {
         textAlign="center"
         display="flex"
         justifyContent="center"
+        
       >
-       <Typography
-  fontWeight="bold"
-  fontSize="32px"
-     sx={{
-        backgroundImage: 'linear-gradient(to right, #833ab4, #fd1d1d, #fcb045)',
-        backgroundClip: 'text',
-        WebkitBackgroundClip: 'text',
-        color: 'transparent',
-    
-      }}
->
-  GetInTouch
-</Typography>
+        <Box  width={isNonMobileScreens ? "30%" : isTablet ? "50%" : "100%"} >
+          <Typography
+            fontWeight="bold"
+            fontSize="32px"
+            sx={{
+              backgroundImage:
+                "linear-gradient(to right, #833ab4, #fd1d1d, #fcb045)",
+              backgroundClip: "text",
+              WebkitBackgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            GetInTouch
+          </Typography>
+          <Typography width={isNonMobileScreens ? "30%" : isTablet ? "34%" : "31%"} fontSize="10px" mt="-0.69rem" mb="-0.49rem" ml="55%" fontStyle="italic">~ by Shekhar Joshi</Typography>
+        </Box>
       </Box>
       {/* FormBox */}
       <Box

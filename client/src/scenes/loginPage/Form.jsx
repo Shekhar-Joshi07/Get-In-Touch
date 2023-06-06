@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   Box,
   Button,
@@ -66,7 +67,7 @@ const Form = () => {
     formData.append("picturePath", values.picture.name);
 
     const savedUserResponse = await fetch(
-      "http://localhost:3001/auth/register",
+      "https://getintouch-o3we.onrender.com/auth/register",
       {
         method: "POST",
         body: formData,
@@ -81,13 +82,13 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    const loggedInResponse = await fetch("http://localhost:3001/auth/login", {
+    const loggedInResponse = await fetch("https://getintouch-o3we.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(values),
     });
     const loggedIn = await loggedInResponse.json();
-    console.log(loggedIn)
+
     onSubmitProps.resetForm();
     if (loggedIn.success) {
       dispatch(
@@ -201,7 +202,7 @@ const Form = () => {
                       >
                         <input {...getInputProps()} />
                         {!values.picture ? (
-                          <p>Add Picture Here</p>
+                          <p>Add profile picture</p>
                         ) : (
                           <FlexBetween>
                             <Typography>{values.picture.name}</Typography>
