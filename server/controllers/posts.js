@@ -14,7 +14,7 @@ export const createPost = async (req, res) => {
       description,
       userPicturePath: user.picturePath,
       picturePath,
-      likes: [],
+      likes: {},
       comments: [],
     });
     await newPost.save();
@@ -66,25 +66,24 @@ export const deletePost = async (req, res) => {
 };
 
 
+/* READ */
 export const getFeedPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("comments.userId").populate("likes.userId");
+    const posts = await Post.find().populate("comments.userId");
     res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
-
 export const getUserPosts = async (req, res) => {
   try {
     const { userId } = req.params;
-    const posts = await Post.find({ userId }).populate("comments.userId").populate("likes.userId");
+    const posts = await Post.find({ userId }).populate("comments.userId");
     res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
-
 
 
 /* UPDATE */
@@ -92,31 +91,26 @@ export const likePost = async (req, res) => {
   try {
     const { id } = req.params;
     const { userId } = req.body;
-
     const post = await Post.findById(id);
+    const isLiked = post.likes.get(userId);
 
-    // Find the like object with matching userId
-    const like = post.likes.find((like) => like.userId && like.userId.toString() === userId);
-
-    if (like) {
-      // If the like exists, remove it from the array
-      post.likes = post.likes.filter((like) => like.userId && like.userId.toString() !== userId);
+    if (isLiked) {
+      post.likes.delete(userId);
     } else {
-      // If the like doesn't exist, add it to the array
-      post.likes.push({ userId });
+      post.likes.set(userId, true);
     }
 
-    const updatedPost = await post.save();
-
-    // Populate the user information in the likes
-    await updatedPost.populate({ path: "likes.userId", model: "User" })
+    const updatedPost = await Post.findByIdAndUpdate(
+      id,
+      { likes: post.likes },
+      { new: true }
+    );
 
     res.status(200).json(updatedPost);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
-
 
 
 export const addComment = async (req, res) => {
