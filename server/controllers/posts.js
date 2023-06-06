@@ -66,24 +66,27 @@ export const deletePost = async (req, res) => {
 };
 
 
-/* READ */
+import Post from "../models/postModel";
+
 export const getFeedPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("comments.userId");
+    const posts = await Post.find().populate("comments.userId").populate("likes.userId");
     res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
+
 export const getUserPosts = async (req, res) => {
   try {
     const { userId } = req.params;
-    const posts = await Post.find({ userId }).populate("comments.userId");
+    const posts = await Post.find({ userId }).populate("comments.userId").populate("likes.userId");
     res.status(200).json(posts);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
 };
+
 
 
 /* UPDATE */
