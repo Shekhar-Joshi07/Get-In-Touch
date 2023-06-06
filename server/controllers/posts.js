@@ -95,12 +95,12 @@ export const likePost = async (req, res) => {
 
     const post = await Post.findById(id);
 
-    // Find the index of the like object with matching userId
-    const likeIndex = post.likes.findIndex((like) => like.userId.toString() === userId);
+    // Find the like object with matching userId
+    const like = post.likes.find((like) => like.userId && like.userId.toString() === userId);
 
-    if (likeIndex > -1) {
+    if (like) {
       // If the like exists, remove it from the array
-      post.likes.splice(likeIndex, 1);
+      post.likes = post.likes.filter((like) => like.userId && like.userId.toString() !== userId);
     } else {
       // If the like doesn't exist, add it to the array
       post.likes.push({ userId });
