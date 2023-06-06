@@ -94,26 +94,29 @@ export const likePost = async (req, res) => {
     const { userId } = req.body;
 
     const post = await Post.findById(id);
-    const isLiked = post.likes.get(userId);
 
-    if (isLiked) {
-      post.likes.delete(userId);
+    // Find the index of the like object with matching userId
+    const likeIndex = post.likes.findIndex((like) => like.userId.toString() === userId);
+
+    if (likeIndex > -1) {
+      // If the like exists, remove it from the array
+      post.likes.splice(likeIndex, 1);
     } else {
-      post.likes.set(userId, true);
+      // If the like doesn't exist, add it to the array
+      post.likes.push({ userId });
     }
 
     const updatedPost = await post.save();
 
     // Populate the user information in the likes
-    await updatedPost
-      .populate({ path: "likes.userId", model: "User" })
-      
+    await updatedPost.populate({ path: "likes.userId", model: "User" }).execPopulate();
 
     res.status(200).json(updatedPost);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-}
+};
+
 
 
 export const addComment = async (req, res) => {
