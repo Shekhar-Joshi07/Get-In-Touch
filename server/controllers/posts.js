@@ -109,7 +109,7 @@ export const likePost = async (req, res) => {
     const updatedPost = await post.save();
 
     // Populate the user information in the likes
-    await updatedPost.populate({ path: "likes.userId", model: "User" }).execPopulate();
+    await updatedPost.populate({ path: "likes.userId", model: "User" })
 
     res.status(200).json(updatedPost);
   } catch (err) {
