@@ -102,18 +102,16 @@ export const likePost = async (req, res) => {
       post.likes.set(userId, true);
     }
 
-    const updatedPost = await post.save();
+    await post.save();
 
     // Populate the user information in the likes
-    await updatedPost
-      .populate({ path: "likes.userId", model: "User" })
-      
+    await post.populate("likes.userId");
 
-    res.status(200).json(updatedPost);
+    res.status(200).json(post);
   } catch (err) {
     res.status(404).json({ message: err.message });
   }
-}
+};
 
 
 export const addComment = async (req, res) => {
