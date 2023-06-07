@@ -9,6 +9,7 @@ import {
   useTheme,
   Alert,
 } from "@mui/material";
+import CircularProgress from '@mui/material/CircularProgress';
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import { Formik } from "formik";
 import * as yup from "yup";
@@ -51,6 +52,7 @@ const initialValuesLogin = {
 const Form = () => {
   const [pageType, setPageType] = useState("login");
   const [loginError, setLoginError] = useState(false);
+  const [isLoading, setLoading] = useState(false);
   const { palette } = useTheme();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -60,6 +62,7 @@ const Form = () => {
 
   const register = async (values, onSubmitProps) => {
     // this allows us to send form info with image
+    setLoading(true)
     const formData = new FormData();
     for (let value in values) {
       formData.append(value, values[value]);
@@ -75,13 +78,15 @@ const Form = () => {
     );
     const savedUser = await savedUserResponse.json();
     onSubmitProps.resetForm();
-
+    
     if (savedUser) {
       setPageType("login");
     }
+    setLoading(false)
   };
 
   const login = async (values, onSubmitProps) => {
+    setLoading(true)
     const loggedInResponse = await fetch("https://getintouch-o3we.onrender.com/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -97,10 +102,12 @@ const Form = () => {
           token: loggedIn.token,
         })
       );
+      
       navigate("/home");
       setLoginError(false)
     } else {
       setLoginError(true);
+      setLoading(false)
     }
   };
 
@@ -242,6 +249,7 @@ const Form = () => {
           {/* BUTTONS */}
           <Box>
             <Button
+            
               fullWidth
               type="submit"
               sx={{
@@ -252,7 +260,7 @@ const Form = () => {
                 "&:hover": { color: palette.primary.main },
               }}
             >
-              {isLogin ? "LOGIN" : "REGISTER"}
+              {isLoading ?<CircularProgress/>: isLogin ? "LOGIN" : "REGISTER"}
             </Button>
             {/* {ALERT} */}
             {loginError && (

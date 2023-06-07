@@ -16,7 +16,7 @@ const LoginPage = () => {
         justifyContent="center"
         
       >
-        <Box  width={isNonMobileScreens ? "30%" : isTablet ? "50%" : "100%"} >
+        <Box  width={isNonMobileScreens ? "23.2%" : isTablet ? "31%" : "79%"} >
           <Typography
             fontWeight="bold"
             fontSize="32px"
@@ -30,7 +30,7 @@ const LoginPage = () => {
           >
             GetInTouch
           </Typography>
-          <Typography width={isNonMobileScreens ? "30%" : isTablet ? "34%" : "31%"} fontSize="10px" mt="-0.69rem" mb="-0.49rem" ml="55%" fontStyle="italic">~ by Shekhar Joshi</Typography>
+          <Typography width={isNonMobileScreens ? "30%" : isTablet ? "40%" : "31%"} fontSize="8.54px" mt="-0.60rem" mb="-0.49rem" ml="55%" fontStyle="italic">~ by Shekhar Joshi</Typography>
         </Box>
       </Box>
       {/* FormBox */}

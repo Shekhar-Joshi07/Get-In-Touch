@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { setFriends } from "state";
 import FlexBetween from "./FlexBetween";
 import UserImage from "./UserImage";
-
+import VerifiedIcon from '@mui/icons-material/Verified';
 const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -49,7 +49,7 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
         >
            <Typography
           color={main}
-          variant="h5"
+          variant="h6"
           fontWeight="500"
           sx={{
             "&:hover": {
@@ -58,9 +58,9 @@ const Friend = ({ friendId, name, subtitle, userPicturePath }) => {
             },
           }}
         >
-          {name}
+          {name} <VerifiedIcon sx={{color:"#3290e4", textAlign:"center", marginBottom:"-2px"}} fontSize="2px"/>
         </Typography>
-        <Typography color={medium} fontSize="0.75rem">
+        <Typography color={medium} fontSize="0.73rem">
           {subtitle}
         </Typography>
         </Box>

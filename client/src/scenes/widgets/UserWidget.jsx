@@ -3,8 +3,11 @@ import {
     EditOutlined,
     LocationOnOutlined,
     WorkOutlineOutlined,
+    
   } from "@mui/icons-material";
-  import { Box, Typography, Divider, useTheme } from "@mui/material";
+
+  import VerifiedIcon from '@mui/icons-material/Verified';
+  import { Box, Typography, Divider, useTheme,useMediaQuery } from "@mui/material";
   import UserImage from "components/UserImage";
   import FlexBetween from "components/FlexBetween";
   import WidgetWrapper from "components/WidgetWrapper";
@@ -20,7 +23,7 @@ import {
     const dark = palette.neutral.dark;
     const medium = palette.neutral.medium;
     const main = palette.neutral.main;
-  
+    const isNonMobileScreens = useMediaQuery("(min-width: 1000px)");
     const getUser = async () => {
       const response = await fetch(`https://getintouch-o3we.onrender.com/users/${userId}`, {
         method: "GET",
@@ -49,7 +52,7 @@ import {
     } = user;
   
     return (
-      <WidgetWrapper >
+      <WidgetWrapper style={{height:"fit-content"}}  >
         {/* FIRST ROW */}
         <FlexBetween
           gap="0.5rem"
@@ -60,7 +63,7 @@ import {
             <UserImage image={picturePath} />
             <Box>
               <Typography
-                variant="h4"
+                variant={isNonMobileScreens ? "h5" :"h4"}
                 color={dark}
                 fontWeight="500"
                 sx={{
@@ -70,9 +73,9 @@ import {
                   },
                 }}
               >
-                {firstName} {lastName}
+                {firstName} {lastName} <VerifiedIcon sx={{color:"#3290e4", textAlign:"center", marginBottom:"-2px"}} fontSize="2px"/>
               </Typography>
-              <Typography color={medium}>{friends.length} friends</Typography>
+              <Typography  color={medium}>{friends.length} friends</Typography>
             </Box>
           </FlexBetween>
           <ManageAccountsOutlined />

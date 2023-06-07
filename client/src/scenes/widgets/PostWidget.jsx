@@ -10,6 +10,7 @@ import {
   CloseOutlined,
   CheckOutlined,
 } from "@mui/icons-material";
+import VerifiedIcon from '@mui/icons-material/Verified';
 import {
   Box,
   Divider,
@@ -23,7 +24,7 @@ import FlexBetween from "components/FlexBetween";
 import Friend from "components/Friend";
 import WidgetWrapper from "components/WidgetWrapper";
 import { useDispatch, useSelector } from "react-redux";
-import { setPost } from "state";
+import { setPost,setPosts } from "state";
 
 const PostWidget = ({
   postId,
@@ -36,7 +37,7 @@ const PostWidget = ({
   likes,
   comments,
   isSticky
-   // Add a timestamp field to the post object
+   
 }) => {
   const [isComments, setIsComments] = useState(false);
   const [comment, setComment] = useState("");
@@ -47,12 +48,10 @@ const PostWidget = ({
   const loggedInUserId = useSelector((state) => state.user._id);
   const isLiked = Boolean(likes[loggedInUserId]);
   const likeCount = Object.keys(likes).length;
-
   const { palette } = useTheme();
   const main = palette.neutral.main;
 
   const patchLike = async () => {
-
     const response = await fetch(
       `https://getintouch-o3we.onrender.com/posts/${postId}/like`,
       {
@@ -64,9 +63,22 @@ const PostWidget = ({
         body: JSON.stringify({ userId: loggedInUserId }),
       }
     );
+    
     const updatedPost = await response.json();
+    getPosts();
     dispatch(setPost({ post: updatedPost }));
+    
   };
+
+  const getPosts = async () => {
+    const response = await fetch("https://getintouch-o3we.onrender.com/posts", {
+      method: "GET",
+      headers: { Authorization: `Bearer ${token}` },
+    });
+    const data = await response.json();
+    dispatch(setPosts({ posts: data }));
+  };
+
 
   const addComment = async () => {
     // Making the API request to add the comment
@@ -118,6 +130,7 @@ const PostWidget = ({
 
     if (response.ok) {
       const updatedPost = await response.json();
+      getPosts()
       dispatch(setPost({ post: updatedPost }));
       setEditMode(false);
     } else {
@@ -134,7 +147,7 @@ const PostWidget = ({
     <WidgetWrapper m="2rem 0" style={{ position: isSticky ? "sticky" : "static" }}>
       <Friend
         friendId={postUserId}
-        name={name}
+        name={name} 
         subtitle={location}
         userPicturePath={userPicturePath}
       />
@@ -232,7 +245,7 @@ const PostWidget = ({
                 <Typography
                   sx={{ fontWeight: "500", color: main, ml: "0.5rem" }}
                 >
-                  {comment.userId.firstName} {comment.userId.lastName}
+                  {comment.userId.firstName} {comment.userId.lastName} <VerifiedIcon sx={{color:"#3290e4", textAlign:"center", marginBottom:"-2px"}} fontSize="2px"/>
                 </Typography>
                 <Typography sx={{ color: main, m: "0.5rem 0", pl: "0.5rem" }}>
                   {comment.comment}

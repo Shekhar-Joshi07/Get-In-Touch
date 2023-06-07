@@ -18,12 +18,13 @@ import {
   Button,
   IconButton,
   useMediaQuery,
+  LinearProgress,
 } from "@mui/material";
 import FlexBetween from "components/FlexBetween";
 import Dropzone from "react-dropzone";
 import UserImage from "components/UserImage";
 import WidgetWrapper from "components/WidgetWrapper";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "state";
 
@@ -41,8 +42,11 @@ const MyPostWidget = ({ picturePath, isSticky }) => {
   const medium = palette.neutral.medium;
   const [showToast, setShowToast] = useState(false);
   const [toastMessage, setToastMessage] = useState("");
-
+  const [isLoading, setIsLoading] = useState(false); // Add isLoading state variable
+  const [progress, setProgress] = useState(0);
+  const [buffer, setBuffer] = useState(10);
   const handlePost = async () => {
+    setIsLoading(true); // Start loading
     const formData = new FormData();
     formData.append("userId", _id);
     formData.append("description", post);
@@ -60,14 +64,52 @@ const MyPostWidget = ({ picturePath, isSticky }) => {
     dispatch(setPosts({ posts }));
     setImage(null);
     setPost("");
+    setIsLoading(false); // Stop loading
 
     // Show success toast message
     setToastMessage("Post created successfully.");
     setShowToast(true);
   };
 
+  const progressRef = useRef(() => {});
+  useEffect(() => {
+    progressRef.current = () => {
+      if (progress > 100) {
+        setProgress(0);
+        setBuffer(10);
+      } else {
+        const diff = Math.random() * 10;
+        const diff2 = Math.random() * 10;
+        setProgress(progress + diff);
+        setBuffer(progress + diff + diff2);
+      }
+    };
+  });
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      progressRef.current();
+    }, 500);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  useEffect(() => {
+    if (showToast) {
+      const timer = setTimeout(() => {
+        setShowToast(false);
+      }, 3000);
+
+      return () => {
+        clearTimeout(timer);
+      };
+    }
+  }, [showToast]);
+
   return (
-    <WidgetWrapper style={{ position: isSticky ? "sticky" : "static",  zIndex:"-999" }}>
+    <WidgetWrapper style={{ position: isSticky ? "sticky" : "static", zIndex: "-999" }}>
       <FlexBetween gap="1.5rem">
         <UserImage image={picturePath} />
         <InputBase
@@ -176,7 +218,12 @@ const MyPostWidget = ({ picturePath, isSticky }) => {
         </Button>
       </FlexBetween>
 
-      {showToast && (
+      {isLoading ? ( // Show loader when isLoading is true
+        <Box sx={{ width: "100%", marginTop: "1.5rem", marginBottom: "0.5rem" }}>
+          <LinearProgress color="success" variant="determinate" value={progress} valueBuffer={buffer} />
+        </Box>
+      ) : null}
+      {showToast ? ( // Show toast when showToast is true
         <Alert
           severity="success"
           variant={mode === "dark" ? "outlined" : "standard"}
@@ -190,7 +237,7 @@ const MyPostWidget = ({ picturePath, isSticky }) => {
           <AlertTitle>Completed</AlertTitle>
           {toastMessage}
         </Alert>
-      )}
+      ) : null}
     </WidgetWrapper>
   );
 };
