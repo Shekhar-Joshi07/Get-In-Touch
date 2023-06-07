@@ -34,12 +34,33 @@ GetInTouch is a social media app built using the powerful MERN stack, combining 
 
 
 
+
+
 <!-- Demo -->
 ## 🎥 Demo
+### Login Page 
+| Desktop View | Mobile View |
+| ------ | ------ |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/18704aeb-6999-4c0d-91af-9ceb1f8258d7" /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/ef6b6642-fda4-4676-8e2f-bb600edd5830 "> |
 
-<p align="center">
-  <img src="your-demo.gif" alt="Project Demo" width="800">
-</p>
+### Register Page
+
+| Desktop View | Mobile View |
+| ------ | ------ |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/d835b143-b5ac-40e1-afa1-77bb5f1aea8c "  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/4e0b9997-42f7-4aa1-855c-5b959c362fc7"> |
+
+
+### Home Page
+| Desktop View | Mobile View |
+| ------ | ------ |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/5df70720-c4bd-4386-b292-c114e96cf3b1 "  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/b4fb377e-1064-43c8-89a2-29c0d4c809b9"> |
+
+### Dark Mode
+| Desktop View | Mobile View |
+| ------ | ------ |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/a4bd8e4a-1b06-4bb3-bf29-df5ba814fd32"  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/8fae7252-fb43-4094-9922-22de1d7133b6"> |
+
+
 
 <!-- Tech Stack -->
 <!-- Deployed Link -->
