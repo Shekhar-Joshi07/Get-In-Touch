@@ -37,7 +37,7 @@ GetInTouch is a social media app built using the powerful MERN stack, combining 
 
 
 <!-- Demo -->
-## 🎥 Demo
+## 🫣 Have a quick look at GetInTouch
 ### Login Page 
 | Desktop View | Mobile View |
 | ------ | ------ |
