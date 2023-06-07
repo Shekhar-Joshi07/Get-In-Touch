@@ -69,7 +69,7 @@ $ npm run start
 <!-- Contact -->
 ## 📞 Contact
 
-Connect with us! We'd love to hear from you.
+Connect with me! I'd love to hear from you.
 
 - Email: [gmail address](shekharjoshi64320@gmail.com)
 - LinkedIn: [@shekharjoshi07](https://www.linkedin.com/in/shekharjoshi07/)
