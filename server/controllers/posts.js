@@ -132,8 +132,7 @@ export const addComment = async (req, res) => {
     await post.save();
 
     // Populate the user information in the comment
-    await post
-      .populate({ path: "comments.userId", model: "User" })
+    await post.populate({ path: "comments.userId", model: "User" })
       
   
     res.status(200).json(post);
