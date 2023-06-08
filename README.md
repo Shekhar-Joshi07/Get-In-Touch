@@ -7,8 +7,9 @@
 
 <!-- Project Logo -->
 <p align="center">
-  <img src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/58122503-5413-4238-ab97-fcdd7c8788fc.png" alt="project-image" width="150" height="150/">
+  <img src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/d17950c1-8aca-4a4a-8efd-9ecd66f830dc" alt="project-image" width="150" height="150/">
 </p>
+
 
 ---
 
@@ -41,24 +42,27 @@ GetInTouch is a social media app built using the powerful MERN stack, combining 
 ### Login Page 
 | Desktop View | Mobile View |
 | ------ | ------ |
-| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/18704aeb-6999-4c0d-91af-9ceb1f8258d7" /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/ef6b6642-fda4-4676-8e2f-bb600edd5830 "> |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/aec70160-63f8-4feb-ab54-c2f6d57f5047" /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/8a57a92a-86df-49d0-9931-25e083dfebb7"> |
 
 ### Register Page
 
 | Desktop View | Mobile View |
 | ------ | ------ |
-| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/d835b143-b5ac-40e1-afa1-77bb5f1aea8c "  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/4e0b9997-42f7-4aa1-855c-5b959c362fc7"> |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/834b297f-a54d-4614-852c-c14b4e5ecf6c"  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/7548051c-3947-45e8-9237-2dafc504842c"> |
+
 
 
 ### Home Page
 | Desktop View | Mobile View |
 | ------ | ------ |
-| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/5df70720-c4bd-4386-b292-c114e96cf3b1 "  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/b4fb377e-1064-43c8-89a2-29c0d4c809b9"> |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/2de6addf-f286-4bef-8b51-30ba7181f10b"  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/88b8b2ba-e589-4b64-a7a4-1414a888f08e"> |
+
 
 ### Dark Mode
 | Desktop View | Mobile View |
 | ------ | ------ |
-| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/a4bd8e4a-1b06-4bb3-bf29-df5ba814fd32"  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/8fae7252-fb43-4094-9922-22de1d7133b6"> |
+| <img width="400" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/bc245c3b-3a3c-4570-a3b0-5e55e379468d"  /> | <img align="center"  width="100" height="200" src="https://github.com/Shekhar-Joshi07/Get-In-Touch/assets/110104542/78092cdf-aa07-404f-aeab-999067890e44"> |
+
 
 
 
